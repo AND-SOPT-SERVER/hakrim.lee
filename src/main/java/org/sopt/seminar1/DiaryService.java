@@ -18,6 +18,7 @@ public class DiaryService {
         return diaryRepository.findAll();
     }
     public void delete(long id){
+
         diaryRepository.deleteById(id);
     }
     public void update(long id, String body) {

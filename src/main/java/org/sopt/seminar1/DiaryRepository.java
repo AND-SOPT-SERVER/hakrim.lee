@@ -1,8 +1,6 @@
 package org.sopt.seminar1;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -15,14 +13,13 @@ public class DiaryRepository {
         //채번과정
         final long id = numbering.addAndGet(1);
         //저장과정
-        storage.put(id, diary.getBody());
-
-        final File file = new File(String.format("diary/%s.txt", id));
+        final File file = new File(String.format("./diary/%s.txt", id));
         try {
             if (file.createNewFile()) {
-                FileWriter writer = new FileWriter("diary/%s.txt");
+                FileWriter writer = new FileWriter(String.format("./diary/%s.txt", id));
                 writer.write(diary.getBody());
                 writer.close();
+                storage.put(id, diary.getBody());
             } else {
 //                System.out.println("File already exists.");
             }
@@ -51,6 +48,8 @@ public class DiaryRepository {
         // null을 저장하고 있는...
         // get을 수정하는 것은 괜찮은가? -> 이건 단순히 delete의 문제가 아니라 null까지 보여주는 read의 문제다
         backupStorage.put(id, storage.get(id));
+        final File file = new File(String.format("./diary/%s.txt", id));
+        file.delete();
         storage.remove(id);
     }
     void update(long id, String body){
@@ -58,13 +57,26 @@ public class DiaryRepository {
     }
 
     void restore(long id) {
+        //restore 과정에서 save의 재사용..?
         String backupData = backupStorage.get(id);
         if(backupData != null){
-            storage.put(id, backupData);
+            final File file = new File(String.format("./diary/%s.txt", id));
+            try {
+                if (file.createNewFile()) {
+                    FileWriter writer = new FileWriter(String.format("./diary/%s.txt", id));
+                    writer.write(backupData);
+                    writer.close();
+                    storage.put(id, backupData);
+                } else {
+//                System.out.println("File already exists.");
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
     void fetchDiary(){
-        String directoryPath = "diary";
+        String directoryPath = "./diary";
         File directory = new File(directoryPath);
         File[] fileList = directory.listFiles();
 
@@ -82,6 +94,8 @@ public class DiaryRepository {
                     }
                 }
             }
+            Set<Long> keys = storage.keySet();
+            numbering.addAndGet(Collections.max(keys));
         }
     }
 
