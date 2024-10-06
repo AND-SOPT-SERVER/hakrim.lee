@@ -31,12 +31,14 @@ public class DiaryController {
     }
 
     final void delete(final String id) {
+        // server 시스템 전반적으로 id를 long으로 다루고 있으므로 ui 인터페이스인 controller에서 타입을 수정해야 겠다고 생각
         long diaryId = Long.parseLong(id);
         diaryService.delete(diaryId);
     }
 
     final void patch(final String id, final String body) {
-
+        long diaryId = Long.parseLong(id);
+        diaryService.update(diaryId, body);
     }
 
     enum Status {

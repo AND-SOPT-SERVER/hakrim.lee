@@ -37,4 +37,7 @@ public class DiaryRepository {
         // get을 수정하는 것은 괜찮은가? -> 이건 단순히 delete의 문제가 아니라 null까지 보여주는 read의 문제다
         storage.remove(id);
     }
+    void update(long id, String body){
+        storage.put(id, body);
+    }
 }
