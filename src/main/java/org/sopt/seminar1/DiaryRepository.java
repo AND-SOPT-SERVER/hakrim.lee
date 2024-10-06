@@ -24,10 +24,17 @@ public class DiaryRepository {
             final String body = storage.get(index);
 
             //불러온 값을 구성한 자료구조로 이관
-            diaryList.add(new Diary(index, body));
+            if(body != null){
+                diaryList.add(new Diary(index, body));
+            }
         }
 
         // 불러온 자료구조를 응답
         return diaryList;
+    }
+    void deleteById(long id){
+        // null을 저장하고 있는...
+        // get을 수정하는 것은 괜찮은가? -> 이건 단순히 delete의 문제가 아니라 null까지 보여주는 read의 문제다
+        storage.remove(id);
     }
 }

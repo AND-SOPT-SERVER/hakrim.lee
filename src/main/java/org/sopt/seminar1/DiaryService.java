@@ -12,4 +12,7 @@ public class DiaryService {
     public List<Diary> getDiaryList(){
         return diaryRepository.findAll();
     }
+    public void delete(long id){
+        diaryRepository.deleteById(id);
+    }
 }

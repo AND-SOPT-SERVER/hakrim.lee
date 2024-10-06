@@ -31,7 +31,8 @@ public class DiaryController {
     }
 
     final void delete(final String id) {
-        
+        long diaryId = Long.parseLong(id);
+        diaryService.delete(diaryId);
     }
 
     final void patch(final String id, final String body) {
