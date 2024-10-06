@@ -41,6 +41,11 @@ public class DiaryController {
         diaryService.update(diaryId, body);
     }
 
+    final void restore(final String id){
+        long diaryId = Long.parseLong(id);
+        diaryService.restore(diaryId);
+    }
+
     enum Status {
         READY,
         RUNNING,

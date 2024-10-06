@@ -8,6 +8,7 @@ import java.util.concurrent.atomic.AtomicLong;
 public class DiaryRepository {
     private final Map<Long, String> storage = new ConcurrentHashMap<>();
     private final AtomicLong numbering = new AtomicLong();
+    private final Map<Long, String> backupStorage = new ConcurrentHashMap<>();
 
     public void save(final Diary diary){
         //채번과정
@@ -35,9 +36,18 @@ public class DiaryRepository {
     void deleteById(long id){
         // null을 저장하고 있는...
         // get을 수정하는 것은 괜찮은가? -> 이건 단순히 delete의 문제가 아니라 null까지 보여주는 read의 문제다
+        backupStorage.put(id, storage.get(id));
         storage.remove(id);
     }
     void update(long id, String body){
         storage.put(id, body);
     }
+
+    void restore(long id) {
+        String backupData = backupStorage.get(id);
+        if(backupData != null){
+            storage.put(id, backupData);
+        }
+    }
+
 }
