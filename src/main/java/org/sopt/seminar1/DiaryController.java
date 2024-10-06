@@ -25,9 +25,9 @@ public class DiaryController {
         return diaryService.getDiaryList();
     }
 
-    final void post(final String body) {
+    final boolean post(final String body) {
         //클라로부터 들어온 값의 유효성 생략
-        diaryService.create(body);
+        return diaryService.create(body);
     }
 
     final void delete(final String id) {
