@@ -4,6 +4,7 @@ import java.util.List;
 
 public class DiaryService {
     private final DiaryRepository diaryRepository = new DiaryRepository();
+    private int updateCounter = 0;
 
     public boolean create(final String body){
         if(body.length() <= 30){
@@ -22,7 +23,10 @@ public class DiaryService {
         diaryRepository.deleteById(id);
     }
     public void update(long id, String body) {
-        diaryRepository.update(id, body);
+        updateCounter += 1;
+        if(updateCounter<2){
+            diaryRepository.update(id, body);
+        }
     }
     public void restore(long id) {
         diaryRepository.restore(id);
