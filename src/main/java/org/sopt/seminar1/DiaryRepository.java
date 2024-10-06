@@ -1,4 +1,5 @@
 package org.sopt.seminar1;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +16,19 @@ public class DiaryRepository {
         final long id = numbering.addAndGet(1);
         //저장과정
         storage.put(id, diary.getBody());
+
+        final File file = new File(String.format("diary/%s.txt", id));
+        try {
+            if (file.createNewFile()) {
+                FileWriter writer = new FileWriter("diary/%s.txt");
+                writer.write(diary.getBody());
+                writer.close();
+            } else {
+//                System.out.println("File already exists.");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     List<Diary> findAll(){
         //Diary 담을 자료구조
@@ -47,6 +61,27 @@ public class DiaryRepository {
         String backupData = backupStorage.get(id);
         if(backupData != null){
             storage.put(id, backupData);
+        }
+    }
+    void fetchDiary(){
+        String directoryPath = "diary";
+        File directory = new File(directoryPath);
+        File[] fileList = directory.listFiles();
+
+        if (fileList != null) {
+            for (File file : fileList) {
+                if (file.isFile()) {
+                    String fileName = file.getName();
+                    long id = Long.parseLong(fileName.replaceAll(".txt", ""));
+                    try (BufferedReader br = new BufferedReader(new FileReader(directoryPath + "/" + fileName))) {
+                        String body = br.readLine();
+                        storage.put(id, body);
+                    } catch (Exception e) {
+                        //TODO Exception handling
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
         }
     }
 

@@ -13,6 +13,7 @@ public class DiaryController {
     }
 
     void boot() {
+        diaryService.fetchDiary();
         this.status = Status.RUNNING;
     }
 

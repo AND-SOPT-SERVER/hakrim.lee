@@ -23,8 +23,10 @@ public class DiaryService {
     public void update(long id, String body) {
         diaryRepository.update(id, body);
     }
-
     public void restore(long id) {
         diaryRepository.restore(id);
+    }
+    public void fetchDiary(){
+        diaryRepository.fetchDiary();
     }
 }
