@@ -7,26 +7,15 @@ import java.util.concurrent.atomic.AtomicLong;
 public class DiaryRepository {
     private final Map<Long, String> storage = new ConcurrentHashMap<>();
     private final AtomicLong numbering = new AtomicLong();
-    private final Map<Long, String> backupStorage = new ConcurrentHashMap<>();
 
-    public void save(final Diary diary){
+    public long save(final Diary diary){
         //채번과정
         final long id = numbering.addAndGet(1);
         //저장과정
-        final File file = new File(String.format("./diary/%s.txt", id));
-        try {
-            if (file.createNewFile()) {
-                FileWriter writer = new FileWriter(String.format("./diary/%s.txt", id));
-                writer.write(diary.getBody());
-                writer.close();
-                storage.put(id, diary.getBody());
-            } else {
-//                System.out.println("File already exists.");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        storage.put(id, diary.getBody());
+        return id;
     }
+
     List<Diary> findAll(){
         //Diary 담을 자료구조
         List<Diary> diaryList = new ArrayList<Diary>();
@@ -45,58 +34,24 @@ public class DiaryRepository {
         return diaryList;
     }
     void deleteById(long id){
-        // null을 저장하고 있는...
-        // get을 수정하는 것은 괜찮은가? -> 이건 단순히 delete의 문제가 아니라 null까지 보여주는 read의 문제다
-        backupStorage.put(id, storage.get(id));
-        final File file = new File(String.format("./diary/%s.txt", id));
-        file.delete();
         storage.remove(id);
     }
+
     void update(long id, String body){
         storage.put(id, body);
     }
 
-    void restore(long id) {
-        //restore 과정에서 save의 재사용..?
-        String backupData = backupStorage.get(id);
-        if(backupData != null){
-            final File file = new File(String.format("./diary/%s.txt", id));
-            try {
-                if (file.createNewFile()) {
-                    FileWriter writer = new FileWriter(String.format("./diary/%s.txt", id));
-                    writer.write(backupData);
-                    writer.close();
-                    storage.put(id, backupData);
-                } else {
-//                System.out.println("File already exists.");
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+    void restore(Diary diary) {
+        storage.put(diary.getId(), diary.getBody());
     }
-    void fetchDiary(){
-        String directoryPath = "./diary";
-        File directory = new File(directoryPath);
-        File[] fileList = directory.listFiles();
 
-        if (fileList != null) {
-            for (File file : fileList) {
-                if (file.isFile()) {
-                    String fileName = file.getName();
-                    long id = Long.parseLong(fileName.replaceAll(".txt", ""));
-                    try (BufferedReader br = new BufferedReader(new FileReader(directoryPath + "/" + fileName))) {
-                        String body = br.readLine();
-                        storage.put(id, body);
-                    } catch (Exception e) {
-                        //TODO Exception handling
-                        throw new RuntimeException(e);
-                    }
-                }
-            }
-            Set<Long> keys = storage.keySet();
-            numbering.addAndGet(Collections.max(keys));
+    void fetchDiary(long idx, ArrayList<Diary> diaries){
+        for (Diary diary : diaries) {
+            storage.put(diary.getId(), diary.getBody());
         }
+        numbering.addAndGet(idx);
     }
 
 }
+
+
