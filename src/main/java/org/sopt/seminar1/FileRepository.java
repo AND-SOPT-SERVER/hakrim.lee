@@ -41,19 +41,30 @@ public class FileRepository {
     }
 
     void backupById(long id) {
+        final String backupDir = String.format("./%s", dirBackup);
+        final File dir = new File(backupDir);
         final String path = String.format("./%s/%s%s", dirDiary, id, fileFormat);
         final String backupAddress = String.format("./%s/%s%s", dirBackup, id, fileFormat);
 
+        if(!dir.exists()){
+            dir.mkdir();
+        }
         final File file = new File(path);
         file.renameTo(new File(backupAddress));
     }
 
     Diary restoreById(long id) {
+        final String backupDir = String.format("./%s", dirBackup);
+        final File dir = new File(backupDir);
         final String path = String.format("./%s/%s%s", dirDiary, id, fileFormat);
         final String backupPath = String.format("./%s/%s%s", dirBackup, id, fileFormat);
-        Diary restored = null;
-
         final File file = new File(backupPath);
+
+        if(!dir.exists()){
+            dir.mkdir();
+        }
+
+        Diary restored = null;
         if (file.renameTo(new File(path))) {
             try (BufferedReader br = new BufferedReader(new FileReader(path))) {
                 String body = br.readLine();
@@ -72,7 +83,10 @@ public class FileRepository {
         File[] fileList = directory.listFiles();
         ArrayList<Diary> diaries = new ArrayList<>();
 
-        //num.txt의 위치가 문제...
+        if(!directory.exists()){
+            directory.mkdir();
+        }
+
         if (fileList != null) {
             for (File file : fileList) {
                 if (file.isFile()) {
@@ -89,12 +103,23 @@ public class FileRepository {
                 }
             }
         }
+
         return diaries;
     }
     long fetchNumbering(){
         final String path = String.format("./num%s", fileFormat);
         long numbering = -1;
+        File file= new File(path);
 
+        if(!file.exists()){
+            try {
+                FileWriter writer = new FileWriter(path);
+                writer.write("0");
+                writer.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line = br.readLine();
             numbering = Long.parseLong(line);
@@ -102,6 +127,8 @@ public class FileRepository {
             //TODO Exception handling
             throw new RuntimeException(e);
         }
+
+
         return numbering;
     }
 }
