@@ -6,16 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="c992c698-d771-42d5-ba69-0cc9fae443af" name="변경" comment="Initial commit">
       <changelist_data name="학림" email="63008138+hfjxjjd123@users.noreply.github.com" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/num.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/sopt/seminar1/FileRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/diary/2.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/diary/4.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/diary/5.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/diary/6.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/sopt/seminar1/DiaryRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/sopt/seminar1/DiaryRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/sopt/seminar1/DiaryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/sopt/seminar1/DiaryService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/sopt/seminar1/FileRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/sopt/seminar1/FileRepository.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

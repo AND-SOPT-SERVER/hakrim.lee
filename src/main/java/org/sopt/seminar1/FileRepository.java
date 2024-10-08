@@ -13,13 +13,9 @@ public class FileRepository {
         final File file = new File(path);
 
         try {
-            if (file.createNewFile()) {
-                FileWriter writer = new FileWriter(path);
-                writer.write(diary.getBody());
-                writer.close();
-            } else {
-//                System.out.println("File already exists.");
-            }
+            FileWriter writer = new FileWriter(path);
+            writer.write(diary.getBody());
+            writer.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
