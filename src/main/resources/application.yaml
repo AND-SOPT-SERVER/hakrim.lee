@@ -1,0 +1,16 @@
+# Bean의 spec
+spring:
+  datasource:
+    driver-class-name: org.h2.Driver
+    # 아래는 DB 서버의 url을 넣으면 됨
+    url: jdbc:h2:mem:testdb
+    username: hakrim
+    password:
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+      dialect: org.hibernate.dialect.H2Dialect
+    properties:
+      format_sql: true
+      show_sql: true
