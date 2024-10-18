@@ -9,7 +9,7 @@ public class DiaryPostResponse {
         this.message = message;
     }
 
-    //TODO 코톡에서 공유
+    //TODO 코톡
     static public DiaryPostResponse success(){
         return new DiaryPostResponse("201", "일기 작성을 성공했습니다.");
     }

@@ -5,12 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c992c698-d771-42d5-ba69-0cc9fae443af" name="변경" comment="++">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/sopt/diary/api/DiaryPostResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/sopt/diary/api/DiaryPatchRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/sopt/diary/api/DiaryPatchResponse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/sopt/diary/DiaryApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/sopt/diary/DiaryApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/sopt/diary/api/DiaryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/sopt/diary/api/DiaryController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/sopt/diary/api/PostDiaryDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/sopt/diary/api/DiaryPostRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/sopt/diary/api/DiaryPostResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/sopt/diary/api/DiaryPostResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/sopt/diary/repository/DiaryEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/sopt/diary/repository/DiaryEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/sopt/diary/service/Diary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/sopt/diary/service/Diary.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/sopt/diary/service/DiaryMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/sopt/diary/service/DiaryMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/sopt/diary/service/DiaryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/sopt/diary/service/DiaryService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -14,7 +14,17 @@ public class DiaryMapper {
         );
     }
 
-    public static DiaryEntity toDiaryEntity(Diary diary){
+    public static Diary fromEntity(DiaryEntity entity) {
+        return Diary.from(
+                entity.getId(),
+                entity.getTitle(),
+                entity.getContent(),
+                entity.getCreatedAt(),
+                entity.getCategory()
+        );
+    }
+
+    public static DiaryEntity toEntity(Diary diary){
         return new DiaryEntity(
                 diary.getTitle(),
                 diary.getContent(),

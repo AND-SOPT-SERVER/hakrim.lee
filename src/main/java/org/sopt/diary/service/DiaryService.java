@@ -1,10 +1,12 @@
 package org.sopt.diary.service;
 
+import org.sopt.diary.DiaryApplication;
 import org.sopt.diary.repository.DiaryEntity;
 import org.sopt.diary.repository.DiaryRepository;
 import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Optional;
 
 
 @Component
@@ -18,7 +20,19 @@ public class DiaryService {
 
     public void createDiary(Diary diary) {
 
-        diaryRepository.save(DiaryMapper.toDiaryEntity(diary));
+        diaryRepository.save(DiaryMapper.toEntity(diary));
+    }
+
+    //역할화할 것
+    public void updateDiary(Long id, String content) {
+
+        try {
+            Diary diary = storedDiary(id);
+            diary.setContent(content);
+            diaryRepository.save(DiaryMapper.toEntity(diary));
+        } catch (Exception e) {
+            throw new DiaryApplication.DB.DataNotFound("사용자 정보를 읽어올 수 없습니다");
+        }
     }
 
     public List<Diary> getList() {
@@ -26,8 +40,7 @@ public class DiaryService {
         final List<DiaryEntity> diaryEntityList = diaryRepository.findAll();
         final List<Diary> diaryList = new ArrayList<Diary>();
         for (DiaryEntity diaryEntity : diaryEntityList) {
-            //TODO 여기에 정윤님 의견 적용
-            diaryList.add(new Diary(
+            diaryList.add(Diary.from(
                     diaryEntity.getId(),
                     diaryEntity.getTitle(),
                     diaryEntity.getContent(),
@@ -36,6 +49,15 @@ public class DiaryService {
             ));
         }
         return diaryList;
+    }
+
+    private Diary storedDiary(Long id) {
+        Optional<DiaryEntity> diaryEntity = diaryRepository.findById(id);
+        if (diaryEntity.isPresent()) {
+            return(DiaryMapper.fromEntity(diaryEntity.get()));
+        }else{
+            throw new DiaryApplication.DB.DataNotFound("사용자 정보를 읽어올 수 없습니다.");
+        }
     }
 }
 //Layer 단위 DTO가 있으면 좋다

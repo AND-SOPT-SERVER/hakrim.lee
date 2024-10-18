@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 public class Diary {
     private final Long id;
     private final String title;
-    private final String content;
+    private String content;
     private final LocalDateTime createdAt;
     private final Category category;
 
@@ -17,6 +17,10 @@ public class Diary {
         this.category = toEnum(category);
     }
 
+    public static Diary from(Long id, String name, String content, LocalDateTime createdAt, String category) {
+        return new Diary(id, name, content, createdAt, category);
+    }
+
     public Long getId(){
         return id;
     }
@@ -26,6 +30,9 @@ public class Diary {
 
     public String getContent() {
         return content;
+    }
+    public void setContent(String content){
+        this.content = content;
     }
 
     public String getCategory() {

@@ -29,5 +29,18 @@ public class DiaryApplication {
             }
         }
     }
+    public interface DB {
+        static class DbException extends RuntimeException{
+            public DbException(String message){
+                super(message);
+            }
+        }
+
+        static class DataNotFound extends DbException {
+            public DataNotFound(String message) {
+                super(message);
+            }
+        }
+    }
 
 }

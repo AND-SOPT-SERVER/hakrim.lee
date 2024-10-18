@@ -43,6 +43,10 @@ public class DiaryEntity {
         return content;
     }
 
+    public void setContent(String content){
+        this.content = content;
+    }
+
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
