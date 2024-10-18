@@ -1,5 +1,6 @@
 package org.sopt.diary.api;
 
+import org.sopt.diary.DiaryApplication;
 import org.sopt.diary.service.Diary;
 import org.sopt.diary.service.DiaryMapper;
 import org.sopt.diary.service.DiaryService;
@@ -20,14 +21,20 @@ public class DiaryController {
         this.diaryService = diaryService;
     }
 
-    //post라는 path에 맞는 요청을 핸들링 하는 api
-    //역할은 request를 받고, response를 주는 역할
     @PostMapping("/api/diary")
-    void post(@RequestBody PostDiaryDto postDiaryDto) {
-        diaryService.createDiary(DiaryMapper.toDiary(postDiaryDto));
+    DiaryPostResponse post(@RequestBody DiaryPostRequest postDiaryDto) {
+
+        try{
+            isContentLengthValid(postDiaryDto.getContent());
+            diaryService.createDiary(DiaryMapper.toDiary(postDiaryDto));
+            return DiaryPostResponse.success();
+        }
+        catch (Exception e){
+            return DiaryPostResponse.fail();
+        }
     }
 
-    @GetMapping("/post")
+    @GetMapping("/api/diary")
     ResponseEntity<DiaryListResponse> get(){
         //서비스로부터 가져온 다이어리 리스트
         List<Diary> diaryList =  diaryService.getList();
@@ -41,4 +48,13 @@ public class DiaryController {
         return ResponseEntity.ok(new DiaryListResponse(diaryResponseList));
     }
 
+    //Exception 관련 코드 작성
+    private void isContentLengthValid(String content) {
+        if(content.length() > 30){
+            throw new DiaryApplication.UI.InvalidInputException("일기 내용은 30자 이하만 가능합니다.");
+        }
+    }
+
 }
+
+

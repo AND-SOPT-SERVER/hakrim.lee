@@ -1,7 +1,10 @@
 package org.sopt.diary;
 
+import org.sopt.seminar1.Main;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import java.io.IOException;
 
 @SpringBootApplication
 //SpringBoot 시작점
@@ -10,4 +13,21 @@ public class DiaryApplication {
     public static void main(String[] args){
         SpringApplication.run(DiaryApplication.class, args);
     }
+
+
+    //TODO interface는 뭔가
+    public interface UI {
+        //TODO 위치변경
+        static class UIException extends RuntimeException {
+            public UIException(String message) {
+                super(message);
+            }
+        }
+        static class InvalidInputException extends UIException {
+            public InvalidInputException(String message) {
+                super(message);
+            }
+        }
+    }
+
 }

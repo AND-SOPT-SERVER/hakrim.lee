@@ -5,21 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c992c698-d771-42d5-ba69-0cc9fae443af" name="변경" comment="++">
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/리베이스_전에_커밋되지_않은_변경_내용_[변경]/shelved.patch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/sopt/diary/DiaryApplication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/sopt/diary/api/DiaryController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/sopt/diary/api/DiaryListResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/sopt/diary/api/DiaryResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/sopt/diary/api/PostDiaryDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/sopt/diary/repository/DiaryEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/sopt/diary/repository/DiaryRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/sopt/diary/service/Diary.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/sopt/diary/service/DiaryMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/sopt/diary/service/DiaryService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/application.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/sopt/diary/api/DiaryPostResponse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/sopt/diary/DiaryApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/sopt/diary/DiaryApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/sopt/diary/api/DiaryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/sopt/diary/api/DiaryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/sopt/diary/api/PostDiaryDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/sopt/diary/api/DiaryPostRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/sopt/diary/service/DiaryMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/sopt/diary/service/DiaryMapper.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,19 +71,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Gradle.ot [:org.sopt.diary.DiaryApplication.main()].executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "seminar2",
-    "kotlin-language-version-configured": "true",
-    "onboarding.tips.debug.path": "/Users/hakrim/IdeaProjects/sopt/ot/src/main/java/org/sopt/Main.java",
-    "project.structure.last.edited": "모듈",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "editing.templates"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Gradle.ot [:org.sopt.diary.DiaryApplication.main()].executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;seminar2&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;onboarding.tips.debug.path&quot;: &quot;/Users/hakrim/IdeaProjects/sopt/ot/src/main/java/org/sopt/Main.java&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;모듈&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editing.templates&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="DiaryApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.sopt.diary.DiaryApplication" />

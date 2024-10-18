@@ -1,11 +1,11 @@
 package org.sopt.diary.api;
 
-public class PostDiaryDto {
+public class DiaryPostRequest {
     private final String title;
     private final String content;
     private final String category;
 
-    PostDiaryDto(String title, String content, String category) {
+    DiaryPostRequest(String title, String content, String category) {
         this.title = title;
         this.content = content;
         this.category = category;

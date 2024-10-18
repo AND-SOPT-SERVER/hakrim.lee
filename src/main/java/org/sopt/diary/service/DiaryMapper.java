@@ -1,10 +1,10 @@
 package org.sopt.diary.service;
 
-import org.sopt.diary.api.PostDiaryDto;
+import org.sopt.diary.api.DiaryPostRequest;
 import org.sopt.diary.repository.DiaryEntity;
 
 public class DiaryMapper {
-    public static Diary toDiary(PostDiaryDto dto) {
+    public static Diary toDiary(DiaryPostRequest dto) {
         return new Diary(
                 null,
                 dto.getTitle(),
