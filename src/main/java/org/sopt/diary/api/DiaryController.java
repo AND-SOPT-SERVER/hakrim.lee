@@ -31,7 +31,7 @@ public class DiaryController {
     }
 
     @GetMapping("/api/diary")
-    ResponseEntity<DiaryListResponse> getList() {
+    ResponseEntity<DiaryListResponse> getDiaryList() {
 
         List<Diary> diaryList = diaryService.getList();
         List<DiaryResponse> diaryResponseList = DiaryResponse.fromList(diaryList);
@@ -40,10 +40,10 @@ public class DiaryController {
     }
 
     @GetMapping("/api/diary/{diaryId}")
-    ResponseEntity<DiaryDetailResponse> get() {
+    ResponseEntity<DiaryDetailResponse> getDiary(@PathVariable Long diaryId) {
 
-        List<Diary> diaryList = diaryService.getDetail();
-        return ResponseEntity.ok(DiaryDetailResponse.from());
+        Diary diary = diaryService.getDetail(diaryId);
+        return ResponseEntity.ok(DiaryDetailResponse.from(diary));
     }
 
 

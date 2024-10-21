@@ -5,11 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c992c698-d771-42d5-ba69-0cc9fae443af" name="변경" comment="++">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/sopt/diary/api/DiaryDetailResponse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/sopt/diary/api/DiaryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/sopt/diary/api/DiaryController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/sopt/diary/api/DiaryDeleteResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/sopt/diary/api/DiaryDeleteResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/sopt/diary/api/DiaryPatchResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/sopt/diary/api/DiaryPatchResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/sopt/diary/api/DiaryPostResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/sopt/diary/api/DiaryPostResponse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/sopt/diary/service/DiaryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/sopt/diary/service/DiaryService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -90,7 +88,7 @@
       <module name="ot.main" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.sopt.diary.api.*" />
+          <option name="PATTERN" value="org.sopt.diary.api.DiaryResponse" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
