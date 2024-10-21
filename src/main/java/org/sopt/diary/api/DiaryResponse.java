@@ -1,14 +1,29 @@
 package org.sopt.diary.api;
 
 
-public class DiaryResponse {
-    private long id;
-    private String title;
+import org.sopt.diary.service.Diary;
 
-    public DiaryResponse(long id, String name){
+import java.util.ArrayList;
+import java.util.List;
+
+public class DiaryResponse {
+    private final long id;
+    private final String title;
+
+    private DiaryResponse(long id, String title){
         this.id = id;
-        this.title = name;
+        this.title = title;
     }
+
+    public static List<DiaryResponse> fromList(List<Diary> diaryList) {
+        List<DiaryResponse> list = new ArrayList<>();
+
+        for (Diary diary : diaryList) {
+            list.add(new DiaryResponse(diary.getId(), diary.getTitle()));
+        }
+        return list;
+    }
+
     public long getId(){
         return id;
     }

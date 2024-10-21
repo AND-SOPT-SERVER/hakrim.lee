@@ -1,6 +1,11 @@
 package org.sopt.diary.service;
 
+import org.sopt.diary.api.DiaryPostRequest;
+import org.sopt.diary.repository.DiaryEntity;
+
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Diary {
     private final Long id;
@@ -17,21 +22,57 @@ public class Diary {
         this.category = toEnum(category);
     }
 
-    public static Diary from(Long id, String name, String content, LocalDateTime createdAt, String category) {
-        return new Diary(id, name, content, createdAt, category);
+    public static DiaryEntity toEntity(Diary diary) {
+        return new DiaryEntity(
+                diary.getTitle(),
+                diary.getContent(),
+                diary.getCreatedAt(),
+                diary.getCategory()
+        );
     }
 
-    public Long getId(){
+    public static Diary fromEntity(DiaryEntity entity) {
+        return new Diary(
+                entity.getId(),
+                entity.getTitle(),
+                entity.getContent(),
+                entity.getCreatedAt(),
+                entity.getCategory()
+        );
+    }
+
+    public static List<Diary> fromEntityList(List<DiaryEntity> diaryEntityList) {
+        List<Diary> list = new ArrayList<>();
+
+        for (DiaryEntity diaryEntity : diaryEntityList) {
+            list.add(Diary.fromEntity(diaryEntity));
+        }
+        return list;
+    }
+
+    public static Diary fromDiaryPostRequest(DiaryPostRequest request) {
+        return new Diary(
+                null,
+                request.getTitle(),
+                request.getContent(),
+                null,
+                request.getCategory()
+        );
+    }
+
+    public Long getId() {
         return id;
     }
-    public String getTitle(){
+
+    public String getTitle() {
         return title;
     }
 
     public String getContent() {
         return content;
     }
-    public void setContent(String content){
+
+    public void setContent(String content) {
         this.content = content;
     }
 
