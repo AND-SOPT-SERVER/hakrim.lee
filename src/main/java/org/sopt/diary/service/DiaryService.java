@@ -34,6 +34,12 @@ public class DiaryService {
         }
     }
 
+    //TODO 해당
+    public Diary getDetail(Long id) {
+
+        return getDiary(id);
+    }
+
     public List<Diary> getList() {
         //repository 로부터 DiaryEntity를 가져옴
         final List<DiaryEntity> diaryEntityList = diaryRepository.findAll();

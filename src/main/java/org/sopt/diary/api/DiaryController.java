@@ -17,20 +17,21 @@ public class DiaryController {
         this.diaryService = diaryService;
     }
 
+    //TODO ResponseEntity의 역할은 무엇인가
     @PostMapping("/api/diary")
-    DiaryPostResponse post(@RequestBody DiaryPostRequest request) {
+    ResponseEntity<DiaryPostResponse> post(@RequestBody DiaryPostRequest request) {
 
         try {
             isContentLengthValid(request.getContent());
             diaryService.createDiary(Diary.fromDiaryPostRequest(request));
-            return DiaryPostResponse.success();
+            return ResponseEntity.ok(DiaryPostResponse.from());
         } catch (Exception e) {
-            return DiaryPostResponse.fail();
+            return ResponseEntity.notFound().build();
         }
     }
 
     @GetMapping("/api/diary")
-    ResponseEntity<DiaryListResponse> get() {
+    ResponseEntity<DiaryListResponse> getList() {
 
         List<Diary> diaryList = diaryService.getList();
         List<DiaryResponse> diaryResponseList = DiaryResponse.fromList(diaryList);
@@ -38,34 +39,32 @@ public class DiaryController {
         return ResponseEntity.ok(DiaryListResponse.fromList(diaryResponseList));
     }
 
-//    @GetMapping("/api/diary/{diaryId}")
-//    ResponseEntity<DiaryListResponse> get() {
-//
-//        List<Diary> diaryList = diaryService.getList();
-//        List<DiaryResponse> diaryResponseList = DiaryResponse.fromList(diaryList);
-//
-//        return ResponseEntity.ok(DiaryListResponse.fromList(diaryResponseList));
-//    }
+    @GetMapping("/api/diary/{diaryId}")
+    ResponseEntity<DiaryDetailResponse> get() {
+
+        List<Diary> diaryList = diaryService.getDetail();
+        return ResponseEntity.ok(DiaryDetailResponse.from());
+    }
 
 
     @PatchMapping("/api/diary/{diaryId}")
-    DiaryPatchResponse updateDiary(@PathVariable Long diaryId, @RequestBody DiaryPatchRequest request){
+    ResponseEntity<DiaryPatchResponse> updateDiary(@PathVariable Long diaryId, @RequestBody DiaryPatchRequest request){
         try {
             isContentLengthValid(request.getContent());
             diaryService.updateDiary(diaryId, request.getContent());
-            return DiaryPatchResponse.success();
+            return ResponseEntity.ok(DiaryPatchResponse.from());
         } catch (Exception e) {
-            return DiaryPatchResponse.fail();
+            return ResponseEntity.notFound().build();
         }
     }
 
     @DeleteMapping("/api/diary/{diaryId}")
-    DiaryDeleteResponse deleteDiary(@PathVariable Long diaryId) {
+    ResponseEntity<DiaryDeleteResponse> deleteDiary(@PathVariable Long diaryId) {
         try{
             diaryService.deleteDiary(diaryId);
-            return DiaryDeleteResponse.success();
+            return ResponseEntity.ok(DiaryDeleteResponse.from());
         } catch (Exception e){
-            return DiaryDeleteResponse.fail();
+            return ResponseEntity.notFound().build();
         }
     }
     //Exception 관련 코드 작성
