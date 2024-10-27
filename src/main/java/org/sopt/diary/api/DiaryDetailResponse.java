@@ -16,8 +16,4 @@ public class DiaryDetailResponse {
         this.content = diary.getTitle();
         this.createdAt = diary.getCreatedAt().toString();
     }
-
-    static public DiaryDetailResponse from(Diary diary){
-        return new DiaryDetailResponse(diary);
-    }
 }

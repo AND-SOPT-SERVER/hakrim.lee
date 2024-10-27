@@ -40,8 +40,8 @@ public class DiaryController {
     @GetMapping("/api/diary/{diaryId}")
     ResponseEntity<DiaryDetailResponse> getDiary(@PathVariable Long diaryId) {
 
-        Diary diary = diaryService.getDetail(diaryId);
-        return ResponseEntity.ok(DiaryDetailResponse.from(diary));
+        DiaryDetailResponse response = Diary.toDiaryDetailResponse(diaryService.getDetail(diaryId));
+        return ResponseEntity.ok(response);
     }
 
 

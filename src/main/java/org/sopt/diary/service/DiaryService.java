@@ -34,10 +34,6 @@ public class DiaryService {
         }
     }
 
-    //TODO getDiary를 Controller에서 호출하면 되긴 한데...
-    // 1. getDiary가 다른 함수에서도 사용가능
-    // 2. 핵심 함수 안을 깔끔하게 유지하고 싶었음
-    // 위의 이유로 getDetail을 만들어서 처리하고 있는데 이 접근법에 대해선 어떻게 생각하시나요. 투머치 일까요?
     public Diary getDetail(Long id) {
 
         return getDiary(id);
