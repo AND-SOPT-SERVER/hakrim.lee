@@ -1,5 +1,6 @@
 package org.sopt.diary.service;
 
+import org.sopt.diary.api.DiaryListResponse;
 import org.sopt.diary.api.DiaryPostRequest;
 import org.sopt.diary.repository.DiaryEntity;
 
@@ -58,6 +59,10 @@ public class Diary {
                 null,
                 request.getCategory()
         );
+    }
+
+    public static DiaryListResponse toDiaryListResponse(List<Diary> diaryList){
+        return new DiaryListResponse((diaryList));
     }
 
     public Long getId() {

@@ -33,10 +33,8 @@ public class DiaryController {
     @GetMapping("/api/diary")
     ResponseEntity<DiaryListResponse> getDiaryList() {
 
-        List<Diary> diaryList = diaryService.getList();
-        List<DiaryResponse> diaryResponseList = DiaryResponse.fromList(diaryList);
-
-        return ResponseEntity.ok(DiaryListResponse.fromList(diaryResponseList));
+        DiaryListResponse response = Diary.toDiaryListResponse(diaryService.getList());
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/api/diary/{diaryId}")
