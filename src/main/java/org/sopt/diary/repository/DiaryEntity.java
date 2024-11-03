@@ -1,7 +1,6 @@
 package org.sopt.diary.repository;
 
 import jakarta.persistence.*;
-
 import java.time.LocalDateTime;
 
 //database를 class로 매핑시키는
