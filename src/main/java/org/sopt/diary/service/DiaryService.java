@@ -20,6 +20,7 @@ public class DiaryService {
 
     public void createDiary(Diary diary) {
         diary.setCreatedAt();
+        diary.setUpdatedAt();
         diaryRepository.save(Diary.toEntity(diary));
     }
 

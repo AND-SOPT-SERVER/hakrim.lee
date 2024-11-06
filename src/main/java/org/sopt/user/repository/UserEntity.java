@@ -3,11 +3,11 @@ package org.sopt.user.repository;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "member")
+@Table(name = "user_test")
 public class UserEntity{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)

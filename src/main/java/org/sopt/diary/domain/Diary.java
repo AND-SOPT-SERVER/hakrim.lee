@@ -4,6 +4,7 @@ import org.sopt.diary.api.response.DiaryDetailResponse;
 import org.sopt.diary.api.response.DiaryListResponse;
 import org.sopt.diary.api.request.DiaryPostRequest;
 import org.sopt.diary.repository.DiaryEntity;
+import org.sopt.user.repository.UserEntity;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -11,14 +12,16 @@ import java.util.List;
 
 public class Diary {
     private final Long id;
+    private final Long userId;
     private final String title;
     private String content;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private final Category category;
 
-    public Diary(Long id, String name, String content, LocalDateTime createdAt, LocalDateTime updatedAt, String category) {
+    public Diary(Long id, Long userId, String name, String content, LocalDateTime createdAt, LocalDateTime updatedAt, String category) {
         this.id = id;
+        this.userId = userId;
         this.title = name;
         this.content = content;
         this.createdAt = createdAt;
@@ -28,6 +31,7 @@ public class Diary {
 
     public static DiaryEntity toEntity(Diary diary) {
         return new DiaryEntity(
+                diary.getUserId(),
                 diary.getTitle(),
                 diary.getContent(),
                 diary.getCreatedAt(),
@@ -39,6 +43,7 @@ public class Diary {
     public static Diary fromEntity(DiaryEntity entity) {
         return new Diary(
                 entity.getId(),
+                entity.getUserId(),
                 entity.getTitle(),
                 entity.getContent(),
                 entity.getCreatedAt(),
@@ -59,6 +64,7 @@ public class Diary {
     public static Diary fromDiaryPostRequest(DiaryPostRequest request) {
         return new Diary(
                 null,
+                request.getUserId(),
                 request.getTitle(),
                 request.getContent(),
                 null,
@@ -81,10 +87,11 @@ public class Diary {
         return DiaryListResponse.of(diaryDetailResponses);
     }
 
+
     public Long getId() {
         return id;
     }
-
+    public Long getUserId() { return userId; }
     public String getTitle() {
         return title;
     }
