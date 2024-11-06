@@ -1,4 +1,4 @@
-package org.sopt.diary.service;
+package org.sopt.diary.domain;
 
 import org.sopt.diary.api.response.DiaryDetailResponse;
 import org.sopt.diary.api.response.DiaryListResponse;

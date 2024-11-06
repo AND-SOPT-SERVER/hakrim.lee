@@ -1,23 +1,15 @@
-package org.sopt.diary.api;
+package org.sopt.diary.api.response;
 
-import org.sopt.diary.service.Diary;
 import java.util.List;
 
-public class DiaryListResponse {
-    private List<Diary> diaryList;
-
-    public DiaryListResponse(List<Diary> diaryList){
-        this.diaryList = diaryList;
+public record DiaryListResponse(List<DiaryResponse> diaryList) {
+    public record DiaryResponse(String title, String content) {
+        public static DiaryResponse of(String title, String content){
+            return new DiaryResponse(title, content);
+        }
     }
 
-    public static DiaryListResponse fromList(List<Diary> diaryList){
-        return new DiaryListResponse((diaryList));
+    public static DiaryListResponse of(List<DiaryResponse> diaryList){
+        return new DiaryListResponse(diaryList);
     }
-
-
-    public List<Diary> getDiaryList(){
-        return diaryList;
-    }
-
-
 }

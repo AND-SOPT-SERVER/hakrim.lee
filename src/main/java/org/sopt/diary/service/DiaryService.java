@@ -1,6 +1,7 @@
 package org.sopt.diary.service;
 
-import org.sopt.diary.DiaryApplication;
+import org.sopt.DiaryApplication;
+import org.sopt.diary.domain.Diary;
 import org.sopt.diary.repository.DiaryEntity;
 import org.sopt.diary.repository.DiaryRepository;
 import org.springframework.stereotype.Component;
@@ -18,7 +19,7 @@ public class DiaryService {
     }
 
     public void createDiary(Diary diary) {
-
+        diary.setCreatedAt();
         diaryRepository.save(Diary.toEntity(diary));
     }
 
@@ -28,6 +29,7 @@ public class DiaryService {
         try {
             Diary diary = getDiary(id);
             diary.setContent(content);
+            diary.setUpdatedAt();
             diaryRepository.save(Diary.toEntity(diary));
         } catch (Exception e) {
             throw new DiaryApplication.DB.DataNotFound("사용자 정보를 읽어올 수 없습니다");
@@ -48,8 +50,8 @@ public class DiaryService {
     public void deleteDiary(Long id) {
 
         try {
-            Diary diary = getDiary(id);
-            diaryRepository.delete(Diary.toEntity(diary));
+            //
+            diaryRepository.deleteById(id);
         } catch (Exception e) {
             throw new DiaryApplication.DB.DataNotFound("사용자 정보를 읽어올 수 없습니다");
         }
@@ -63,4 +65,5 @@ public class DiaryService {
             throw new DiaryApplication.DB.DataNotFound("사용자 정보를 읽어올 수 없습니다.");
         }
     }
+
 }

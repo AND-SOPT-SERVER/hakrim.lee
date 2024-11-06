@@ -1,12 +1,13 @@
 package org.sopt.diary.api;
 
-import org.sopt.diary.DiaryApplication;
-import org.sopt.diary.service.Diary;
+import org.sopt.DiaryApplication;
+import org.sopt.diary.api.request.DiaryPatchRequest;
+import org.sopt.diary.api.request.DiaryPostRequest;
+import org.sopt.diary.api.response.*;
+import org.sopt.diary.domain.Diary;
 import org.sopt.diary.service.DiaryService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 
 @RestController
@@ -19,12 +20,12 @@ public class DiaryController {
 
     //TODO ResponseEntity의 역할은 무엇인가
     @PostMapping("/api/diary")
-    ResponseEntity<DiaryPostResponse> post(@RequestBody DiaryPostRequest request) {
+    ResponseEntity<Void> post(@RequestBody DiaryPostRequest request) {
 
         try {
             isContentLengthValid(request.getContent());
             diaryService.createDiary(Diary.fromDiaryPostRequest(request));
-            return ResponseEntity.ok(DiaryPostResponse.from());
+            return ResponseEntity.ok().build();
         } catch (Exception e) {
             return ResponseEntity.notFound().build();
         }
@@ -46,21 +47,21 @@ public class DiaryController {
 
 
     @PatchMapping("/api/diary/{diaryId}")
-    ResponseEntity<DiaryPatchResponse> updateDiary(@PathVariable Long diaryId, @RequestBody DiaryPatchRequest request){
+    ResponseEntity<Void> updateDiary(@PathVariable Long diaryId, @RequestBody DiaryPatchRequest request){
         try {
             isContentLengthValid(request.getContent());
             diaryService.updateDiary(diaryId, request.getContent());
-            return ResponseEntity.ok(DiaryPatchResponse.from());
+            return ResponseEntity.ok().build();
         } catch (Exception e) {
             return ResponseEntity.notFound().build();
         }
     }
 
     @DeleteMapping("/api/diary/{diaryId}")
-    ResponseEntity<DiaryDeleteResponse> deleteDiary(@PathVariable Long diaryId) {
+    ResponseEntity<Void> deleteDiary(@PathVariable Long diaryId) {
         try{
             diaryService.deleteDiary(diaryId);
-            return ResponseEntity.ok(DiaryDeleteResponse.from());
+            return ResponseEntity.ok().build();
         } catch (Exception e){
             return ResponseEntity.notFound().build();
         }
