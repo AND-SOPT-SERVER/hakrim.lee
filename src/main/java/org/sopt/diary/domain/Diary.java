@@ -1,8 +1,8 @@
 package org.sopt.diary.service;
 
-import org.sopt.diary.api.DiaryDetailResponse;
-import org.sopt.diary.api.DiaryListResponse;
-import org.sopt.diary.api.DiaryPostRequest;
+import org.sopt.diary.api.response.DiaryDetailResponse;
+import org.sopt.diary.api.response.DiaryListResponse;
+import org.sopt.diary.api.request.DiaryPostRequest;
 import org.sopt.diary.repository.DiaryEntity;
 
 import java.time.LocalDateTime;
@@ -13,14 +13,16 @@ public class Diary {
     private final Long id;
     private final String title;
     private String content;
-    private final LocalDateTime createdAt;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
     private final Category category;
 
-    public Diary(Long id, String name, String content, LocalDateTime createdAt, String category) {
+    public Diary(Long id, String name, String content, LocalDateTime createdAt, LocalDateTime updatedAt, String category) {
         this.id = id;
         this.title = name;
         this.content = content;
         this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
         this.category = toEnum(category);
     }
 
@@ -29,6 +31,7 @@ public class Diary {
                 diary.getTitle(),
                 diary.getContent(),
                 diary.getCreatedAt(),
+                diary.getUpdatedAt(),
                 diary.getCategory()
         );
     }
@@ -39,6 +42,7 @@ public class Diary {
                 entity.getTitle(),
                 entity.getContent(),
                 entity.getCreatedAt(),
+                entity.getUpdatedAt(),
                 entity.getCategory()
         );
     }
@@ -58,6 +62,7 @@ public class Diary {
                 request.getTitle(),
                 request.getContent(),
                 null,
+                null,
                 request.getCategory()
         );
     }
@@ -69,7 +74,11 @@ public class Diary {
 
 
     public static DiaryListResponse toDiaryListResponse(List<Diary> diaryList){
-        return new DiaryListResponse((diaryList));
+        List<DiaryListResponse.DiaryResponse> diaryDetailResponses = diaryList.stream()
+                .map(diary -> DiaryListResponse.DiaryResponse.of(diary.getTitle(), diary.getContent()))
+                .toList();
+
+        return DiaryListResponse.of(diaryDetailResponses);
     }
 
     public Long getId() {
@@ -94,6 +103,17 @@ public class Diary {
 
     public LocalDateTime getCreatedAt() {
         return createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setCreatedAt(){
+        this.createdAt = LocalDateTime.now();
+    }
+    public void setUpdatedAt(){
+        this.updatedAt = LocalDateTime.now();
     }
 
     private enum Category {

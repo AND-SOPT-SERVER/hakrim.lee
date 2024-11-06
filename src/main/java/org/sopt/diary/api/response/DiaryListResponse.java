@@ -1,7 +1,6 @@
 package org.sopt.diary.api;
 
 import org.sopt.diary.service.Diary;
-
 import java.util.List;
 
 public class DiaryListResponse {
