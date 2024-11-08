@@ -15,6 +15,7 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
+    @Transactional
     public void signUp(User user){
 
         try {

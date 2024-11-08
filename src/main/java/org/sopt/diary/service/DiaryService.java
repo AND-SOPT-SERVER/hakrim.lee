@@ -18,6 +18,7 @@ public class DiaryService {
         this.diaryRepository = diaryRepository;
     }
 
+    @Transactional
     public void createDiary(Diary diary) {
 
         diary.setCreatedAt();
@@ -52,6 +53,7 @@ public class DiaryService {
         return Diary.fromEntityList(diaryEntityList);
     }
 
+    @Transactional
     public void deleteDiary(Long id) {
 
         try {
