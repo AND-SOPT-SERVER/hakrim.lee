@@ -1,6 +1,5 @@
 package org.sopt.user.domain;
 
-import org.sopt.diary.repository.DiaryEntity;
 import org.sopt.user.repository.UserEntity;
 
 public class User {

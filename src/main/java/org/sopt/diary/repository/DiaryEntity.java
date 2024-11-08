@@ -1,11 +1,9 @@
 package org.sopt.diary.repository;
 
 import jakarta.persistence.*;
-import org.sopt.user.domain.User;
-import org.sopt.user.repository.UserEntity;
+import org.sopt.diary.domain.Diary;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 //database를 class로 매핑시키는
 //DB 정보를 java app에 끌어오는데 사용
@@ -50,7 +48,19 @@ public class DiaryEntity {
         this.category = category;
     }
 
-    public DiaryEntity() {}
+    public DiaryEntity() {
+    }
+
+    public static DiaryEntity of(Diary diary) {
+        return new DiaryEntity(
+                diary.getUserId(),
+                diary.getTitle(),
+                diary.getContent(),
+                diary.getCreatedAt(),
+                diary.getUpdatedAt(),
+                diary.getCategory()
+        );
+    }
 
     public long getId(){
         return id;

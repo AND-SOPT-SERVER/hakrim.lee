@@ -33,6 +33,12 @@ public class DiaryApplication {
             }
         }
 
+        static class DataDuplicated extends DbException{
+            public DataDuplicated(String message){
+                super(message);
+            }
+        }
+
         static class DataNotFound extends DbException {
             public DataNotFound(String message) {
                 super(message);
