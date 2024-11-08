@@ -1,10 +1,7 @@
-package org.sopt.diary;
+package org.sopt;
 
-import org.sopt.seminar1.Main;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import java.io.IOException;
 
 @SpringBootApplication
 //SpringBoot 시작점
@@ -32,6 +29,12 @@ public class DiaryApplication {
     public interface DB {
         static class DbException extends RuntimeException{
             public DbException(String message){
+                super(message);
+            }
+        }
+
+        static class DataDuplicated extends DbException{
+            public DataDuplicated(String message){
                 super(message);
             }
         }

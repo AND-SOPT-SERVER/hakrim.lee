@@ -1,12 +1,15 @@
 package org.sopt.diary.api;
 
-import org.sopt.diary.DiaryApplication;
-import org.sopt.diary.service.Diary;
+import org.sopt.diary.api.request.DiaryPatchRequest;
+import org.sopt.diary.api.request.DiaryPostRequest;
+import org.sopt.diary.api.response.DiaryDetailResponse;
+import org.sopt.diary.api.response.DiaryListResponse;
+import org.sopt.diary.domain.Diary;
 import org.sopt.diary.service.DiaryService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import static org.sopt.utils.validators.DiaryApiValidator.*;
 
 
 @RestController
@@ -19,56 +22,51 @@ public class DiaryController {
 
     //TODO ResponseEntity의 역할은 무엇인가
     @PostMapping("/api/diary")
-    ResponseEntity<DiaryPostResponse> post(@RequestBody DiaryPostRequest request) {
+    ResponseEntity<String> post(@RequestBody DiaryPostRequest request) {
 
         try {
-            isContentLengthValid(request.getContent());
+            isPostRequestValid(request);
             diaryService.createDiary(Diary.fromDiaryPostRequest(request));
-            return ResponseEntity.ok(DiaryPostResponse.from());
         } catch (Exception e) {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/api/diary")
     ResponseEntity<DiaryListResponse> getDiaryList() {
 
-        DiaryListResponse response = Diary.toDiaryListResponse(diaryService.getList());
+        DiaryListResponse response = DiaryListResponse.of(diaryService.getList());
         return ResponseEntity.ok(response);
     }
 
     @GetMapping("/api/diary/{diaryId}")
     ResponseEntity<DiaryDetailResponse> getDiary(@PathVariable Long diaryId) {
 
-        DiaryDetailResponse response = Diary.toDiaryDetailResponse(diaryService.getDetail(diaryId));
+        DiaryDetailResponse response = new DiaryDetailResponse(diaryService.getDetail(diaryId));
         return ResponseEntity.ok(response);
     }
 
-
     @PatchMapping("/api/diary/{diaryId}")
-    ResponseEntity<DiaryPatchResponse> updateDiary(@PathVariable Long diaryId, @RequestBody DiaryPatchRequest request){
+    ResponseEntity<Void> updateDiary(@PathVariable Long diaryId, @RequestBody DiaryPatchRequest request){
         try {
-            isContentLengthValid(request.getContent());
-            diaryService.updateDiary(diaryId, request.getContent());
-            return ResponseEntity.ok(DiaryPatchResponse.from());
+            isContentLengthValid(request.content());
+            diaryService.updateDiary(diaryId, request.content());
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             return ResponseEntity.notFound().build();
         }
+        return ResponseEntity.ok().build();
     }
 
+    //TODO 없는 id를 삭제한 사실을 클라에 전달하지 못함
     @DeleteMapping("/api/diary/{diaryId}")
-    ResponseEntity<DiaryDeleteResponse> deleteDiary(@PathVariable Long diaryId) {
+    ResponseEntity<Void> deleteDiary(@PathVariable Long diaryId) {
         try{
             diaryService.deleteDiary(diaryId);
-            return ResponseEntity.ok(DiaryDeleteResponse.from());
+            return ResponseEntity.ok().build();
         } catch (Exception e){
             return ResponseEntity.notFound().build();
-        }
-    }
-    //Exception 관련 코드 작성
-    private void isContentLengthValid(String content) {
-        if (content.length() > 30) {
-            throw new DiaryApplication.UI.InvalidInputException("일기 내용은 30자 이하만 가능합니다.");
         }
     }
 }
